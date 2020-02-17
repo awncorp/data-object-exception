@@ -1,1 +1,12 @@
 Changelog for Data-Object-Exception
+
+2.01 2020-02-17T05:23:10
+ - Added release updates
+ - Re-releasing to the CPAN
+
+2.00 2020-02-04T03:37:30
+ - Built release version 2.00
+ - Added release updates
+ - Update release script and workflow
+ - Extract from framework
+ - Initial commit
