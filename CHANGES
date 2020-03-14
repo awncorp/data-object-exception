@@ -1,6 +1,12 @@
 Changelog for Data-Object-Exception
 
-2.01 2020-02-17T05:23:10
+2.02 2020-03-14T23:15:07
+ - Added release updates
+ - Support setting all attributes using "throw"
+ - Document attributes
+
+2.01 2020-02-17T05:23:11
+ - Built release version 2.01
  - Added release updates
  - Re-releasing to the CPAN
 
