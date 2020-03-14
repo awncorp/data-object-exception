@@ -27,6 +27,14 @@ method: trace
 
 =cut
 
+=attributes
+
+id: ro, opt, Str
+context: ro, opt, Any
+message: ro, opt, Str
+
+=cut
+
 =synopsis
 
   use Data::Object::Exception;
