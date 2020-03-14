@@ -82,19 +82,35 @@ The package allows objects to be instantiated with key-value arguments.
 
 =method throw
 
-The throw method throws an error with message.
+The throw method throws an error with message (and optionally, an ID).
 
 =signature throw
 
-throw(Str $class, Any $context, Maybe[Number] $offset) : Any
+throw(Tuple[Str, Str] | Str $message, Any $context, Maybe[Number] $offset) : Any
 
 =example-1 throw
+
+  use Data::Object::Exception;
+
+  my $exception = Data::Object::Exception->new;
+
+  $exception->throw('Oops!')
+
+=example-2 throw
 
   use Data::Object::Exception;
 
   my $exception = Data::Object::Exception->new('Oops!');
 
   $exception->throw
+
+=example-3 throw
+
+  use Data::Object::Exception;
+
+  my $exception = Data::Object::Exception->new;
+
+  $exception->throw(['E001', 'Oops!'])
 
 =cut
 
@@ -197,6 +213,34 @@ $subs->example(-1, 'throw', 'method', fun($tryable) {
   ok my $result = $tryable->result;
   ok $result->isa('Data::Object::Exception');
   ok !length $result->id;
+  ok !length $result->context;
+  ok length $result->frames;
+  is $result->message, 'Oops!';
+
+  $result
+});
+
+$subs->example(-2, 'throw', 'method', fun($tryable) {
+  $tryable->default(fun($caught) {
+    $caught
+  });
+  ok my $result = $tryable->result;
+  ok $result->isa('Data::Object::Exception');
+  ok !length $result->id;
+  ok !length $result->context;
+  ok length $result->frames;
+  is $result->message, 'Oops!';
+
+  $result
+});
+
+$subs->example(-3, 'throw', 'method', fun($tryable) {
+  $tryable->default(fun($caught) {
+    $caught
+  });
+  ok my $result = $tryable->result;
+  ok $result->isa('Data::Object::Exception');
+  is $result->id, 'E001';
   ok !length $result->context;
   ok length $result->frames;
   is $result->message, 'Oops!';

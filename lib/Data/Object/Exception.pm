@@ -64,12 +64,15 @@ fun BUILDARGS($class, @args) {
 # FUNCTIONS
 
 fun throw($self, $message, $context, $offset) {
+  my $id;
+
   my $class = ref $self || $self;
 
-  my $id;
-  my $frames;
-
   my $args = {};
+
+  if (ref $message eq 'ARRAY') {
+    ($id, $message) = @$message;
+  }
 
   if (ref $self) {
     for my $name (keys %$self) {
@@ -77,6 +80,7 @@ fun throw($self, $message, $context, $offset) {
     }
   }
 
+  $args->{id} = $id if $id;
   $args->{message} = $message if $message;
   $args->{context} = $context if $context;
 
